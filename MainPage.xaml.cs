@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -24,7 +25,24 @@ namespace FirstUWPApp
     {
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+        }
+
+        private MessageDialog CreateMessageDialog(string message, string title = "Alert!")
+        {
+            var dialog = new MessageDialog(message, title);
+            return dialog;
+        }
+
+        private async void AlertMe_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = CreateMessageDialog(TextField.Text);
+            await dialog.ShowAsync();
+        }
+
+        private void ChangeText_Click(object sender, RoutedEventArgs e)
+        {
+            TextField.Text = "Here is some new text for you...";
         }
     }
 }
